@@ -57,6 +57,15 @@ Thank you for considering contributing to the Laravel framework! The contributio
 
 In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
+
+## Require
+<ul>
+    <li>"cviebrock/eloquent-sluggable": "^10.0"</li>
+    <li>"laravel/sanctum": "^3.2"</li>
+    <li>"mchev/banhammer": "^1.2"</li>
+</ul>    
+
+
 ## Security Vulnerabilities
 
 If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
