@@ -35,6 +35,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index']);
+        Route::post('/create-admin', [DashboardController::class, 'store']);
 
         // books
         Route::get('/books', [BookController::class, 'index']);

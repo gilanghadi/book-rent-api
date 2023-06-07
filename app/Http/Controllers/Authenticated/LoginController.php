@@ -16,18 +16,19 @@ class LoginController extends Controller
     {
         $validator = $request->validated();
 
-        $user = User::where('username', $validator['username'])->first();
-        if (!$user || !Hash::check($validator['password'], $user->password)) {
-            throw ValidationException::withMessages([
-                'error' => ['The provided credentials are incorrect.'],
-            ]);
+        if (Auth::attempt($validator, $request->remember)) {
+            $user = User::where('username', $validator['username'])->first();
+            if (!$user || !Hash::check($validator['password'], $user->password)) {
+                throw ValidationException::withMessages([
+                    'error' => ['The provided credentials are incorrect.'],
+                ]);
+            }
+            $user->createToken('login')->plainTextToken;
+            return response()->json([
+                'status' => true,
+                'message' => 'Login Berhasil!'
+            ], 200);
         }
-
-        return response()->json([
-            'status' => true,
-            '_token' =>  $user->createToken('login')->plainTextToken,
-            'message' => 'Login Berhasil!'
-        ], 200);
     }
 
     public function logout(Request $request)
