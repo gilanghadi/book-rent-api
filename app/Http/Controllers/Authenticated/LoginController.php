@@ -23,9 +23,10 @@ class LoginController extends Controller
                     'error' => ['The provided credentials are incorrect.'],
                 ]);
             }
-            $user->createToken('login')->plainTextToken;
+
             return response()->json([
                 'status' => true,
+                '_token' => $user->createToken('login')->plainTextToken,
                 'message' => 'Login Berhasil!'
             ], 200);
         }
