@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Authenticated;
 
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
 class LoginRequest extends FormRequest
@@ -23,7 +24,11 @@ class LoginRequest extends FormRequest
     {
         return [
             'username' => 'required|string|',
-            'password' => 'required|min:8'
+            'password' => 'required|min:8', Password::min(8)
+                ->mixedCase()
+                ->numbers()
+                ->symbols()
+                ->uncompromised(),
         ];
     }
 }

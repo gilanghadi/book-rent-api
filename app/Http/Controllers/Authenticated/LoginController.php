@@ -17,13 +17,7 @@ class LoginController extends Controller
         $validator = $request->validated();
 
         if (Auth::attempt($validator, $request->remember)) {
-            $user = User::where('username', $validator['username'])->first();
-            if (!$user || !Hash::check($validator['password'], $user->password)) {
-                throw ValidationException::withMessages([
-                    'error' => ['The provided credentials are incorrect.'],
-                ]);
-            }
-
+            $user = Auth::user();
             return response()->json([
                 'status' => true,
                 '_token' => $user->createToken('login')->plainTextToken,
